@@ -67,9 +67,5 @@ public class AdminService implements IAdminService {
     public void approveEmployee(int employeeId) {
         throw new UnsupportedOperationException();
     }
-
-    @Override
-    public void updateShipmentStatus(Shipment shipment, ShipmentStatus shipmentStatus) {
-        throw new UnsupportedOperationException();
-    }
+    
 }
