@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Warehouse {
-    private static List<Shipment> shipments = new LinkedList<>();
+    private static PriorityQueue<Shipment> shipments = new PriorityQueue<>();
     private static List<Product> stocks = new LinkedList<>();
     private int id;
     private String address;
@@ -12,7 +12,19 @@ public class Warehouse {
 
     public Warehouse(){
        // this.id = (new IdGenerator()).Generate();
+        id=0;
+        address="Default Address";
+        phone="444 44 44";
     }
+
+    public Warehouse(int id , String address,String phone){
+        // this.id = (new IdGenerator()).Generate();
+        this.id=id;
+        this.address=address;
+        this.phone=phone;
+    }
+
+
 
     public List<Shipment> getShipments() {
         return shipments;

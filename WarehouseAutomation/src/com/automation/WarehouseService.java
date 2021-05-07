@@ -11,9 +11,28 @@ public class WarehouseService implements IWarehouseService {
     }
 
     @Override
-    public List<Shipment> getShipmentsByBranchId(int branchId) {
+    public PriorityQueue<Shipment> getShipmentsByBranchId(int branchId) {
+
         //filter shipments with given branch id and return it
+        if(branchId<0 || warehouse.getshipments()==null )
         throw new UnsupportedOperationException();
+
+        Iterator iterator = warehouse.getshipments().iterator();
+        Shipment temp= new Shipment();
+        while (iterator.hasNext()) {
+            if(iterator.next().getBranchId()==branchId)
+                break
+
+
+
+
+                //System.out.print(iterator.next() + " ");
+
+        }
+
+        return iterator.next();
+
+
     }
 
     @Override

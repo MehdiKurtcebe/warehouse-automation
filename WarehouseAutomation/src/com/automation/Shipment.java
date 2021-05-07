@@ -30,6 +30,9 @@ public class Shipment {
         return Id;
     }
 
+    public int getBranchId() {
+        return branchId;
+    }
 
     public TransportationEmployee getEmployee() {
         return employee;
