@@ -26,7 +26,7 @@ public class Warehouse {
 
 
 
-    public List<Shipment> getShipments() {
+    public PriorityQueue<Shipment> getShipments() {
         return shipments;
     }
 
