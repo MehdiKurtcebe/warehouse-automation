@@ -1,5 +1,4 @@
 package com.automation;
-
 import java.util.List;
 
 public class WarehouseEmployeeService implements IWarehouseEmployeeService {
@@ -10,22 +9,33 @@ public class WarehouseEmployeeService implements IWarehouseEmployeeService {
     }
 
     @Override
-    public void updateShipmentStatus(Shipment shipment, ShipmentStatus shipmentStatus) {
-        throw new UnsupportedOperationException();
+    public void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus) {
+        return warehouseService.updateShipmentStatus(shipmentId, shipmentStatus);
     }
 
     @Override
     public Shipment getShipmentInformation(int shipmentId) {
-        throw new UnsupportedOperationException();
+        return warehouseService.getShipmentById(shipmentId);
     }
 
     @Override
     public List<Product> getProductList() {
-        throw new UnsupportedOperationException();
+        return warehouseService.getProductList();
     }
 
     @Override
     public Product searchProduct(int productId) {
-        throw new UnsupportedOperationException();
+        return warehouseService.searchProductById(productId);
+    }
+
+    @Override
+    public boolean addProduct(Product product) {
+        if(product == null) throw new UnsupportedOperationException();
+        return warehouseService.addProduct(product);
+    }
+
+    @Override
+    public boolean removeProduct(int productId) {
+        return warehouseService.removeProduct(productId);
     }
 }

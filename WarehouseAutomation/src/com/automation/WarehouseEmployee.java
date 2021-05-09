@@ -6,7 +6,7 @@ public class WarehouseEmployee extends Employee {
     public WarehouseEmployee(String name, String phone, String email, String password, int warehouseId){
         super(name, phone, email, password);
         this.warehouseId = warehouseId;
-        // this.id = (new IdGenerator()).Generate();
+        this.warehouseId = IdGenerator.GetFreshWarehouseEmployeeId();
     }
 
     public int getWarehouseId() {

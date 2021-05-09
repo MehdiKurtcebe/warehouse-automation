@@ -35,5 +35,4 @@ public class IdGenerator {
     public static int GetFreshShipmentId(){
         return UUID.randomUUID().hashCode() & Integer.MAX_VALUE;
     }
-
 }
