@@ -1,6 +1,6 @@
 package com.automation;
 
-import java.util.List;
+import java.util.PriorityQueue;
 
 public class BranchEmployeeService implements IBranchEmployeeService {
 
@@ -11,14 +11,14 @@ public class BranchEmployeeService implements IBranchEmployeeService {
     }
 
     @Override
-    public createShipmentRequest(BinarySearchTree<Product> productList) {
+    public boolean createShipmentRequest(BinarySearchTree<Product> productList) {
         return warehouseService.supplyProduct(productList);
     }
 
     @Override
     public BinarySearchTree<Product> getProductList() {
         BinarySearchTree<Product> productList = new BinarySearchTree<>();
-        for each(Product p: warehouseService.getProductList()){
+        for(Product p: warehouseService.getProductList()){
             if(p.getStoreId() == getBranchId()) productList.add(p);
         }
         if(productList.size() == 0) throw new IllegalStateException();
@@ -27,8 +27,8 @@ public class BranchEmployeeService implements IBranchEmployeeService {
 
     @Override
     public Shipment getShipmentById(int shipmentId) {
-        for each(Shipment s: warehouseService.getShipmentsByBranchId(getBranchId())){
-            if(s.getId == shipmentId) return s;
+        for(Shipment s: warehouseService.getShipmentsByBranchId(getBranchId())){
+            if(s.getId() == shipmentId) return s;
         }
         throw new NoSuchElementException();
     }
