@@ -11,27 +11,36 @@ public class BranchEmployeeService implements IBranchEmployeeService {
     }
 
     @Override
-    public boolean requestProduct() {
-        throw new UnsupportedOperationException();
+    public createShipmentRequest(BinarySearchTree<Product> productList) {
+        return warehouseService.supplyProduct(productList);
     }
 
     @Override
-    public List<Product> getProductList() {
-        throw new UnsupportedOperationException();
+    public BinarySearchTree<Product> getProductList() {
+        BinarySearchTree<Product> productList = new BinarySearchTree<>();
+        for each(Product p: warehouseService.getProductList()){
+            if(p.getStoreId() == getBranchId()) productList.add(p);
+        }
+        if(productList.size() == 0) throw new IllegalStateException();
+        return productList;
     }
 
     @Override
-    public Product getProductById(int productId) {
-        throw new UnsupportedOperationException();
+    public Shipment getShipmentById(int shipmentId) {
+        for each(Shipment s: warehouseService.getShipmentsByBranchId(getBranchId())){
+            if(s.getId == shipmentId) return s;
+        }
+        throw new NoSuchElementException();
     }
 
     @Override
-    public List<Shipment> getProductRequestHistory() {
-        throw new UnsupportedOperationException();
+    public PriorityQueue<Shipment> getShipmentHistory() {
+        if(warehouseService.getShipmentsByBranchId(getBranchId()).size == 0)  throw new IllegalStateException();
+        else return warehouseService.getShipmentsByBranchId(getBranchId());
     }
 
     @Override
-    public void createSupplyRequest(List<Product> productList) {
+    public void createSupplyRequest(BinarySearchTree<Product> productList) {
         warehouseService.supplyProduct(productList);
     }
 }
