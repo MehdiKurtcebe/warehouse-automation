@@ -8,5 +8,15 @@ public interface IWarehouseService {
     List<Product> getOutOfStockProducts();
     boolean supplyProduct(Product product);
     boolean supplyProduct(List<Product> productList);
+    void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus);
+    Shipment getShipmentById(int shipmentId);
+
+    Product searchProductById(int productId);
+
+    boolean addProduct(Product product);
+    boolean removeProduct(int product);
+
+
+
     Shipment getShipmentToDeliver(int branchId);
 }
