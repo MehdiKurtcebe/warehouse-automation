@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BranchService implements IBranchService{
-    private static List<Branch> branches = new LinkedList<>(); //TODO update with selected data structure
+    private static List<Branch> branchess = new LinkedList<>(); //TODO update with selected data structure
 
     @Override
     public boolean add(Branch branch){
