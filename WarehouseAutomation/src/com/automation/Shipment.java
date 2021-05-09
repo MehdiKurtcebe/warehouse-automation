@@ -10,21 +10,25 @@ public class Shipment {
     private ShipmentStatus status;
     private List<Product> productList;
 
-    public Shipment(int branchId, TransportationEmployee employee, ShipmentStatus status, List<Product> productList) {
+    public Shipment(int branchId, ShipmentStatus status, List<Product> productList) {
         //this.id = generate id
-        this.employee = employee;
+        this.branchId=branchId;
+        TransportationEmployeeService serve=new TransportationEmployeeService();
+        this.employee = serve.occupyNearEmployee(branchId);
         this.status = status;
         this.productList = productList;
         this.branchId = branchId;
     }
+    public Shipment(ShipmentStatus status, List<Product> productList) {
 
-    public Shipment(int branchId, TransportationEmployee employee, List<Product> productList) {
-        //this.id = generate id
-        this.status = ShipmentStatus.NONE;
-        this.employee = employee;
+        this.branchId=IdGenerator.GetFreshShipmentId();
+        TransportationEmployeeService serve=new TransportationEmployeeService();
+        this.employee = serve.occupyNearEmployee(branchId);
+        this.status = status;
         this.productList = productList;
-        this.branchId = branchId;
+
     }
+
 
     public int getId() {
         return Id;
@@ -54,6 +58,7 @@ public class Shipment {
         return productList;
     }
 
+       //olan varsa üstüne mi eklenecek
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }

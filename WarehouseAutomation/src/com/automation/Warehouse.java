@@ -2,35 +2,42 @@ package com.automation;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Warehouse {
     private static PriorityQueue<Shipment> shipments = new PriorityQueue<>();
     private static List<Product> stocks = new LinkedList<>();
-    private int id;
+    private final int id;
     private String address;
     private String phone;
 
     public Warehouse(){
-       // this.id = (new IdGenerator()).Generate();
-        id=0;
+       this.id = IdGenerator.GetFreshWarehouseId();
+
         address="Default Address";
         phone="444 44 44";
     }
-
+    public Warehouse( String address,String phone){
+        this.id = IdGenerator.GetFreshWarehouseId();
+        this.address=address;
+        this.phone=phone;
+    }
     public Warehouse(int id , String address,String phone){
-        // this.id = (new IdGenerator()).Generate();
-        this.id=id;
+
+        this.id = id;
         this.address=address;
         this.phone=phone;
     }
 
 
+    //
+    //
 
     public PriorityQueue<Shipment> getShipments() {
         return shipments;
     }
 
-    public void setShipments(List<Shipment> shipments) {
+    public void setShipments(PriorityQueue<Shipment> shipments) {
         Warehouse.shipments = shipments;
     }
 
