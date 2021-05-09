@@ -7,9 +7,20 @@ public class Product {
     private int stockCount;
     private ProductCategory category;
 
+    Product(){}
+
+    Product(int storeId, String name, int stockCount, ProductCategory category){
+        id = IdGenerator.GetFreshProductId();
+        this.storeId = storeId;
+        this.name = name;
+        this.stockCount = stockCount;
+        this.category = category;
+    }
+
     public int getId() {
         return id;
     }
+
 
     public int getStoreId() {
         return storeId;
