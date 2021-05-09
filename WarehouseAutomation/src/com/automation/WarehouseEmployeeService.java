@@ -19,7 +19,7 @@ public class WarehouseEmployeeService implements IWarehouseEmployeeService {
     }
 
     @Override
-    public List<Product> getProductList() {
+    public BinarySearchTree<Product> getProductList() {
         return warehouseService.getProductList();
     }
 
