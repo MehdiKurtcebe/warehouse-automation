@@ -7,5 +7,5 @@ public interface IBranchEmployeeService {
     BinarySearchTree<Product> getProductList();
     Shipment getShipmentById(int shipmentId);
     PriorityQueue<Shipment> getShipmentHistory();
-    void createSupplyRequest(List<Product> productList);
+    void createSupplyRequest(BinarySearchTree<Product> productList);
 }

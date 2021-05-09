@@ -10,7 +10,6 @@ public class BranchEmployeeService implements IBranchEmployeeService {
         this.warehouseService = new WarehouseService();
     }
 
-    @Override
     public boolean createShipmentRequest(BinarySearchTree<Product> productList) {
         return warehouseService.supplyProduct(productList);
     }

@@ -1,6 +1,6 @@
 package com.automation;
 
-public class Product {
+public class Product implements Comparable<Product> {
     private int id;
     private int storeId;
     private String name;

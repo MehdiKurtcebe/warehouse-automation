@@ -2,6 +2,7 @@ package com.automation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class WarehouseService implements IWarehouseService {
 
@@ -27,7 +28,7 @@ public class WarehouseService implements IWarehouseService {
     }
 
     @Override // queue bir tane olmayacak mı?, warehouse içinde, traverse gerekli
-    public List<Shipment> getShipmentsByBranchId(int branchId) {
+    public PriorityQueue<Shipment> getShipmentsByBranchId(int branchId) {
 
         //filter shipments with given branch id and return it
         if(branchId<0 || warehouse.getShipments()==null )
@@ -51,7 +52,7 @@ public class WarehouseService implements IWarehouseService {
 
     // hatali olabilir çünkü warehouseda shipmentlar var , her birinde ayrı productlist var,bu isteniyorsa
     @Override
-    public List<Product> getProductList() {
+    public BinarySearchTree<Product> getProductList() {
 
         if(warehouse.getStocks()==null)
             throw new UnsupportedOperationException();
@@ -64,7 +65,7 @@ public class WarehouseService implements IWarehouseService {
     @Override//başka bir list ile karşılaştırılıp bir liste oluşturulacak? ,
     // yoksa stocksdaki productların stock countuna mı bakılacak
     // <0 ı kontrol
-    public List<Product> getOutOfStockProducts() {
+    public BinarySearchTree<Product> getOutOfStockProducts() {
 
         throw new UnsupportedOperationException();
     }
@@ -97,7 +98,6 @@ public class WarehouseService implements IWarehouseService {
         throw new UnsupportedOperationException();
     }
 
-    @Override// üsttekiyle aynı şekilde shipment bilgileri gerekli,branch id ve temployee
     public boolean supplyProduct(List<Product> productList) {
         //Create shipments for it with none status and add it to warehouse
         if(productList==null)
