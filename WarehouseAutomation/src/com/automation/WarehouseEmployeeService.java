@@ -10,7 +10,7 @@ public class WarehouseEmployeeService implements IWarehouseEmployeeService {
 
     @Override
     public void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus) {
-        return warehouseService.updateShipmentStatus(shipmentId, shipmentStatus);
+        warehouseService.updateShipmentStatus(shipmentId, shipmentStatus);
     }
 
     @Override

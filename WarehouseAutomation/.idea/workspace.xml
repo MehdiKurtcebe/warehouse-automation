@@ -2,39 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95386fa5-b97b-4e58-8cc8-d20b7e2652fe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/META-INF/WarehouseAutomation.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/AdminService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/Branch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/BranchEmployee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/BranchEmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/BranchService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/Employee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/EmployeeStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IAdminService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IBranchEmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IBranchService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/ITransportationEmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IUserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IWarehouseEmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IWarehouseService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/IdGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/ProductCategory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/Shipment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/ShipmentStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/TransportationEmployee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/TransportationEmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/UserType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/Warehouse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/WarehouseEmployee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/WarehouseEmployeeService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/WarehouseAutomation/com/automation/WarehouseService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/automation/BranchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/automation/BranchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/automation/WarehouseEmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/automation/WarehouseEmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
