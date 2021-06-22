@@ -1,5 +1,6 @@
 package com.automation;
 
+import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
 public class BranchEmployeeService implements IBranchEmployeeService {
@@ -7,7 +8,7 @@ public class BranchEmployeeService implements IBranchEmployeeService {
     private IWarehouseService warehouseService;
 
     BranchEmployeeService(){
-        this.warehouseService = new WarehouseService();
+        warehouseService = new WarehouseService();
     }
 
     @Override
@@ -16,27 +17,27 @@ public class BranchEmployeeService implements IBranchEmployeeService {
     }
 
     @Override
-    public BinarySearchTree<Product> getProductList() {
+    public BinarySearchTree<Product> getProductList(int branchId) {
         BinarySearchTree<Product> productList = new BinarySearchTree<>();
         for(Product p: warehouseService.getProductList()){
-            if(p.getStoreId() == getBranchId()) productList.add(p);
+            if(p.getStoreId() == branchId()) productList.add(p);
         }
         if(productList.size() == 0) throw new IllegalStateException();
         return productList;
     }
 
     @Override
-    public Shipment getShipmentById(int shipmentId) {
-        for(Shipment s: warehouseService.getShipmentsByBranchId(getBranchId())){
+    public Shipment getShipmentById(int shipmentId, int branchId) {
+        for(Shipment s: warehouseService.getShipmentsByBranchId(branchId())){
             if(s.getId() == shipmentId) return s;
         }
         throw new NoSuchElementException();
     }
 
     @Override
-    public PriorityQueue<Shipment> getShipmentHistory() {
-        if(warehouseService.getShipmentsByBranchId(getBranchId()).size == 0)  throw new IllegalStateException();
-        else return warehouseService.getShipmentsByBranchId(getBranchId());
+    public PriorityQueue<Shipment> getShipmentHistory(int branchId) {
+        if(warehouseService.getShipmentsByBranchId(branchId()).size == 0)  throw new IllegalStateException();
+        else return warehouseService.getShipmentsByBranchId(branchId());
     }
 
     @Override
