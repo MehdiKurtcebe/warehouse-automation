@@ -124,6 +124,7 @@ public class Main {
 
         if(branchEmployeeService.createShipmentRequest(productList3))   System.out.println("Shipment requesting productList3 is created successfully");
 
-        if(branchEmployeeService.createSupplyRequest(productList3))   System.out.println("Supply request for productList3 is created successfully");
+        branchEmployeeService.createSupplyRequest(productList3);
+        System.out.println("Supply request for productList3 is created successfully");
     }
 }
