@@ -1,13 +1,14 @@
 package com.automation;
 
 import java.util.List;
+import java.util.PriorityQueue;
 
 public interface IWarehouseService {
-    List<Shipment> getShipmentsByBranchId(int branchId);
-    List<Product> getProductList();
-    List<Product> getOutOfStockProducts();
+    PriorityQueue<Shipment> getShipmentsByBranchId(int branchId);
+    BinarySearchTree<Product> getProductList();
+    BinarySearchTree<Product> getOutOfStockProducts();
     boolean supplyProduct(Product product);
-    boolean supplyProduct(List<Product> productList);
+    boolean supplyProduct(BinarySearchTree<Product> productList);
     void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus);
     Shipment getShipmentById(int shipmentId);
 

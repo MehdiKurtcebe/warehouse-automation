@@ -1,10 +1,10 @@
 package com.automation;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class BranchService implements IBranchService{
-    private static List<Branch> branches = new LinkedList<>(); //TODO update with selected data structure
+    private static ArrayList<Branch> branches = new ArrayList<>(); //TODO update with selected data structure
 
     @Override
     public boolean add(Branch branch){

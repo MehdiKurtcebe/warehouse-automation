@@ -2,6 +2,7 @@ package com.automation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import static com.automation.ShipmentStatus.NONE;
 
@@ -43,6 +44,7 @@ public class WarehouseService implements IWarehouseService {
     @Override
     public List<Shipment> getShipmentsByBranchId(int branchId) {
 
+
         //filter shipments with given branch id and return it
         if(branchId<0 || warehouse.getShipments()==null )
             return null;
@@ -66,7 +68,7 @@ public class WarehouseService implements IWarehouseService {
 
 
     @Override
-    public List<Product> getProductList() {
+    public BinarySearchTree<Product> getProductList() {
 
         if(warehouse.getStocks()==null)
             return null;
@@ -80,7 +82,6 @@ public class WarehouseService implements IWarehouseService {
     public List<Product> getOutOfStockProducts() {
         return warehouse.findOutProducts();
 
-    }
 
     /**
      * Adds given product to supply list
@@ -109,7 +110,9 @@ public class WarehouseService implements IWarehouseService {
         return warehouse.addShipment(ship);
     }
 
+
     @Override
+
     public boolean supplyProduct(List<Product> productList) {
         //Create shipments for it with none status and add it to warehouse
         return productList != null;

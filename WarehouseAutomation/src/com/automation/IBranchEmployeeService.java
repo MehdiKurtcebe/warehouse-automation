@@ -1,11 +1,11 @@
 package com.automation;
 
-import java.util.List;
+import java.util.PriorityQueue;
 
 public interface IBranchEmployeeService {
-    boolean requestProduct();
-    List<Product> getProductList();
-    Product getProductById(int productId);
-    List<Shipment> getProductRequestHistory();
-    void createSupplyRequest(List<Product> productList);
+    boolean createShipmentRequest(BinarySearchTree<Product> productList);
+    BinarySearchTree<Product> getProductList(int branchId);
+    Shipment getShipmentById(int shipmentId,int branchId);
+    PriorityQueue<Shipment> getShipmentHistory(int branchId);
+    void createSupplyRequest(BinarySearchTree<Product> productList);
 }
