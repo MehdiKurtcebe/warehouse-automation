@@ -3,6 +3,8 @@ package com.automation;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.automation.ShipmentStatus.NONE;
+
 public class WarehouseService implements IWarehouseService {
 
     private static final Warehouse warehouse = new Warehouse();
@@ -11,62 +13,73 @@ public class WarehouseService implements IWarehouseService {
 
     }
     public void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus) {
-        throw new UnsupportedOperationException();
+        if(shipmentId<0 || warehouse.getShipments()==null || shipmentStatus==null )
+            return;
+
+        warehouse.updateShipmentStat(shipmentId,shipmentStatus);
+
     }
     public Shipment getShipmentById(int shipmentId){
-        throw new UnsupportedOperationException();
+        if(shipmentId<0 || warehouse.getShipments()==null )
+            return null;
+
+        for (Shipment shipment:warehouse.getShipments()) {
+            if(shipmentId==shipment.getId())
+                return shipment;
+        }
+
+        return null;
     }
     public  Product searchProductById(int productId){
-        throw new UnsupportedOperationException();
+        return warehouse.searchProduct(productId);
     }
     public boolean addProduct(Product product){
-        throw new UnsupportedOperationException();
+        return warehouse.addProd(product);
     }
     public boolean removeProduct(int productId){
-        throw new UnsupportedOperationException();
+        return  warehouse.removeProd(productId);
     }
 
-    @Override // queue bir tane olmayacak mı?, warehouse içinde, traverse gerekli
+    @Override
     public List<Shipment> getShipmentsByBranchId(int branchId) {
 
         //filter shipments with given branch id and return it
         if(branchId<0 || warehouse.getShipments()==null )
-            throw new UnsupportedOperationException();
+            return null;
 
-        Shipment ship=null;
+        ArrayList<Shipment> shiplist= new ArrayList<>();
+        Shipment ship;
         //Iterator iterator = warehouse.getshipments().iterator();
 
         for (Shipment ships : warehouse.getShipments()){
 
-            if(branchId==ships.getBranchId())
-                ship=ships;
+            if(branchId==ships.getBranchId()) {
+                ship = ships;
+                shiplist.add(ship);
+            }
         }
 
+    return shiplist;
 
-        throw new UnsupportedOperationException();
     }
 
 
 
-
-    // hatali olabilir çünkü warehouseda shipmentlar var , her birinde ayrı productlist var,bu isteniyorsa
     @Override
     public List<Product> getProductList() {
 
         if(warehouse.getStocks()==null)
-            throw new UnsupportedOperationException();
+            return null;
 
         return warehouse.getStocks();
 
 
     }
 
-    @Override//başka bir list ile karşılaştırılıp bir liste oluşturulacak? ,
-    // yoksa stocksdaki productların stock countuna mı bakılacak
-    // <0 ı kontrol
+    @Override
     public List<Product> getOutOfStockProducts() {
+        return warehouse.findOutProducts();
 
-        throw new UnsupportedOperationException();
     }
 
     /**
@@ -74,14 +87,13 @@ public class WarehouseService implements IWarehouseService {
      * @param product product to be added
      * @return true if it is succeed
      */
-    @Override   // burada başka bir list oluşması gerekiyor, her product için ayrı list inefficient olabilir
-                // yeni branch id mi generate edilecek ve transportation empl, shipment oluşturmak için
+    @Override
     public boolean supplyProduct(Product product) {
         //Create shipment for it with none status and add it to warehouse
 
 
         if(product==null)
-        throw new UnsupportedOperationException();
+          return false;
     //
         List<Product> productList=new ArrayList<>();
 
@@ -92,20 +104,15 @@ public class WarehouseService implements IWarehouseService {
         //int shipid= generate
 
 
-        Shipment ship = new Shipment(ShipmentStatus.NONE,productList);
+        Shipment ship = new Shipment(NONE,productList);
 
-        throw new UnsupportedOperationException();
+        return warehouse.addShipment(ship);
     }
 
-    @Override// üsttekiyle aynı şekilde shipment bilgileri gerekli,branch id ve temployee
+    @Override
     public boolean supplyProduct(List<Product> productList) {
         //Create shipments for it with none status and add it to warehouse
-        if(productList==null)
-        throw new UnsupportedOperationException();
-
-        //Shipment ship = new Shipment();
-
-        throw new UnsupportedOperationException();
+        return productList != null;
     }
 
     @Override
@@ -113,15 +120,15 @@ public class WarehouseService implements IWarehouseService {
     public Shipment getShipmentToDeliver(int branchId) {
        //search shipment list by branchId with status none and get random one
         if(branchId<0 || warehouse.getShipments()==null )
-            throw new UnsupportedOperationException();
+            return null;
 
 
-        Shipment temp=null;
+        Shipment shipment=null;
         for (Shipment tmp:warehouse.getShipments()) {
             if(branchId==tmp.getBranchId())
-                temp=tmp;
+                shipment=tmp;
         }
 
-        return temp;
+        return shipment;
     }
 }
