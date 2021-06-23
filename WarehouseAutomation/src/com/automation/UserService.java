@@ -12,12 +12,10 @@ public class UserService implements IUserService {
 	
     private static ConcurrentSkipListMap<Integer,Employee> employeeList;
     private IAdminService adminService;
-    private static final String fileName="users.bin";
     
     
     public UserService(){
-    	if(employeeList == null)
-    		loadUsers();
+   
     	if(employeeList == null)
     		employeeList = new ConcurrentSkipListMap<Integer, Employee>();
     	
@@ -45,47 +43,20 @@ public class UserService implements IUserService {
     	if(employeeList.containsKey(employee.getId()))
     		return false;
         employeeList.put(employee.getId(), employee);
-        saveUsers();
+      
         return true;
     }
 
     @Override
     public boolean removeUser(Employee employee) {
         if( employeeList.remove(employee.getId()) != null ){
-        	saveUsers();
+       
         	return true;
         }
         return false;
     }
   
-    private void saveUsers() {
-    
-    try {
-    	FileOutputStream file = new FileOutputStream(fileName);
-        ObjectOutputStream object = new ObjectOutputStream(file);
-        object.writeObject(employeeList);
-        object.close();
-
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
-   
-    }
-    
-    private void loadUsers() {
-    	 try {
-    		 
-             FileInputStream fileIn = new FileInputStream(fileName);
-             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
   
-             employeeList = (ConcurrentSkipListMap<Integer, Employee>) objectIn.readObject();
-  
-             objectIn.close();
-  
-         } catch (Exception ex) {
-             //ex.printStackTrace();
-         }
-    }
     
 
     public static void loginMenu() {
