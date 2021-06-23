@@ -1,6 +1,7 @@
 package com.automation;
 
 import java.util.List;
+import java.util.Vector;
 
 public class ProductService implements IProductService {
     class Node {
@@ -18,6 +19,53 @@ public class ProductService implements IProductService {
     // BST root node
     Node root;
 
+    /* This function traverse the skewed binary tree and
+      stores its nodes pointers in vector nodes[] */
+    void storeBSTNodes(Node root, Vector<Node> nodes)
+    {
+        // Base case
+        if (root == null)
+            return;
+
+        // Store nodes in Inorder (which is sorted
+        // order for BST)
+        storeBSTNodes(root.left, nodes);
+        nodes.add(root);
+        storeBSTNodes(root.right, nodes);
+    }
+
+    /* Recursive function to construct binary tree */
+    Node buildTreeUtil(Vector<Node> nodes, int start,
+                       int end)
+    {
+        // base case
+        if (start > end)
+            return null;
+
+        /* Get the middle element and make it root */
+        int mid = (start + end) / 2;
+        Node node = nodes.get(mid);
+
+        /* Using index in Inorder traversal, construct
+           left and right subtress */
+        node.left = buildTreeUtil(nodes, start, mid - 1);
+        node.right = buildTreeUtil(nodes, mid + 1, end);
+
+        return node;
+    }
+
+    // This functions converts an unbalanced BST to
+    // a balanced BST
+    Node buildTree(Node root)
+    {
+        // Store nodes of given BST in sorted order
+        Vector<Node> nodes = new Vector<Node>();
+        storeBSTNodes(root, nodes);
+
+        // Constucts BST from nodes[]
+        int n = nodes.size();
+        return buildTreeUtil(nodes, 0, n - 1);
+    }
     // Constructor for Product Service. =>initial empty tree
     ProductService(){
         root = null;
@@ -110,12 +158,14 @@ public class ProductService implements IProductService {
     @Override
     public boolean add(Product product) {
         root = insert_Recursive(root, product);
+        this.buildTree(root);
         return true;
     }
 
     @Override
     public boolean remove(int productId) {
         root = delete_Recursive(root, productId);
+        this.buildTree(root);
         return true;
     }
 
@@ -129,8 +179,10 @@ public class ProductService implements IProductService {
         return null;
     }
 
-    @Override
     public List<Product> searchByCategory(ProductCategory category) {
         throw new UnsupportedOperationException();
     }
+
+
+
 }

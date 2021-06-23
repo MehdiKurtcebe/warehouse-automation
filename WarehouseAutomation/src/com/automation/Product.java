@@ -9,12 +9,12 @@ public class Product implements Comparable<Product> {
 
     Product(){}
 
-    Product(int storeId, String name, int stockCount, ProductCategory category){
+    Product(int storeId, String name, int stockCount, ProductCategory category_){
         id = IdGenerator.GetFreshProductId();
         this.storeId = storeId;
         this.name = name;
         this.stockCount = stockCount;
-        this.category = category;
+        category = category_;
     }
 
     public int getId() {
@@ -50,7 +50,12 @@ public class Product implements Comparable<Product> {
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
-        this.category = category;
+    public void setCategory(ProductCategory category_) {
+        category = category_;
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return 0;
     }
 }
