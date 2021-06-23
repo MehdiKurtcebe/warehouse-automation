@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 
 public class Warehouse {
     private static PriorityQueue<Shipment> shipments = new PriorityQueue<>();
-    private static BinarySearchTree<Product> stocks = new BinarySearchTree<>();
+    private static List<Product> stocks = new LinkedList<>();
     private final int id;
     private String address;
     private String phone;
@@ -86,10 +86,6 @@ public class Warehouse {
 
      Warehouse.stocks = stocks;
     }   
-      =======
-    public static BinarySearchTree<Product> getStocks() {
-        return stocks;
-    }
 
 
         

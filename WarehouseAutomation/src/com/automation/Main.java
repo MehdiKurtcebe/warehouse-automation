@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
+    	System.out.print("hello word \n");
+/*
         Scanner scan = new Scanner(System.in);
 
         System.out.println("How many branch employees you want to enter?");
@@ -126,5 +127,7 @@ public class Main {
 
         branchEmployeeService.createSupplyRequest(productList3);
         System.out.println("Supply request for productList3 is created successfully");
+    
+    */
     }
 }

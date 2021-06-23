@@ -13,6 +13,7 @@ public class BinarySearchTree < E
   /** Return value from the public add method. */
   protected boolean addReturn;
 
+  private int size = 0;
   /** Return value from the public delete method. */
   protected E deleteReturn;
 
@@ -55,6 +56,7 @@ public class BinarySearchTree < E
    */
   public boolean add(E item) {
     root = add(root, item);
+    size++;
     return addReturn;
   }
 
@@ -99,8 +101,11 @@ public class BinarySearchTree < E
    */
   public E delete(E target) {
     root = delete(root, target);
+    size--;
     return deleteReturn;
   }
+  
+  public int size() { return size; }
 
   /** Recursive delete method.
       post: The item is not in the tree;

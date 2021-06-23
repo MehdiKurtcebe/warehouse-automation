@@ -42,14 +42,14 @@ public class WarehouseService implements IWarehouseService {
     }
 
     @Override
-    public List<Shipment> getShipmentsByBranchId(int branchId) {
+    public PriorityQueue<Shipment> getShipmentsByBranchId(int branchId) {
 
 
         //filter shipments with given branch id and return it
         if(branchId<0 || warehouse.getShipments()==null )
             return null;
 
-        ArrayList<Shipment> shiplist= new ArrayList<>();
+        PriorityQueue<Shipment> shiplist= new PriorityQueue();
         Shipment ship;
         //Iterator iterator = warehouse.getshipments().iterator();
 
@@ -68,7 +68,7 @@ public class WarehouseService implements IWarehouseService {
 
 
     @Override
-    public BinarySearchTree<Product> getProductList() {
+    public List<Product> getProductList() {
 
         if(warehouse.getStocks()==null)
             return null;
@@ -82,7 +82,7 @@ public class WarehouseService implements IWarehouseService {
     public List<Product> getOutOfStockProducts() {
         return warehouse.findOutProducts();
 
-
+    }
     /**
      * Adds given product to supply list
      * @param product product to be added
@@ -111,12 +111,7 @@ public class WarehouseService implements IWarehouseService {
     }
 
 
-    @Override
-
-    public boolean supplyProduct(List<Product> productList) {
-        //Create shipments for it with none status and add it to warehouse
-        return productList != null;
-    }
+  
 
     @Override
     // bu üstteki by branch id methodunun yerine olabilir
@@ -134,4 +129,11 @@ public class WarehouseService implements IWarehouseService {
 
         return shipment;
     }
+	
+	
+	@Override
+	public boolean supplyProduct(BinarySearchTree<Product> productList) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

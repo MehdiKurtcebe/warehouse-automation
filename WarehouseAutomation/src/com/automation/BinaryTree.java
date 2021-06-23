@@ -8,6 +8,7 @@ import java.io.*;
 public class BinaryTree < E >
     implements Serializable {
 
+
   /** Class to encapsulate a tree node. */
   protected static class Node < E >
       implements Serializable {
@@ -119,6 +120,7 @@ public class BinaryTree < E >
   public boolean isLeaf() {
     return (root.left == null && root.right == null);
   }
+  
 
   public String toString() {
     StringBuilder sb = new StringBuilder();
