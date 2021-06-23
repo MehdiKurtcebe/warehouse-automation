@@ -1,35 +1,29 @@
 package com.automation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class BranchService implements IBranchService{
-    private static ArrayList<Branch> branches = new ArrayList<>(); 
+    private static HashMap<Integer,Branch> branches = new HashMap<>(); 
 
     @Override
     public boolean add(Branch branch){
     	if(branch == null) return false;
-       return branches.add(branch);
+    	if(branches.containsKey(branch.getId()))
+    		return false;
+       branches.put(branch.getId(),branch);
+       return true;
     }
 
     @Override
     public boolean remove(int branchId){
-        
-        Branch branch = search(branchId);
-        branches.remove(branch);
-        return true;
+    	return branches.remove(branchId) != null;
     }
 
     @Override
     public Branch search(int branchId) {
-    	Branch branch = new Branch();
-        for(Branch b:  branches) {
-        	if(b.getId() == branchId) {
-        		branch = b;
-        		break;
-        	}
-        }
-        return branch;
+        return branches.get(branchId);
     }
 
 
