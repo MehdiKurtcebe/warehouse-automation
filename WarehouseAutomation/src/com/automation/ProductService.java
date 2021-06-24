@@ -1,5 +1,6 @@
 package com.automation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -177,6 +178,24 @@ public class ProductService implements IProductService {
         else
             System.out.println("The product you're looking for is out of stock!");
         return null;
+    }
+
+    private void getProductRecursive(Node localRoot, ArrayList<Product> list) {
+        if (localRoot.right == null && localRoot.left == null) {
+            list.add(localRoot.product);
+            return;
+        }
+        if (localRoot.left != null) getProductRecursive(localRoot.left, list);
+        list.add(localRoot.product);
+        if (localRoot.right != null) getProductRecursive(localRoot.right, list);
+    }
+
+    @Override
+    public ArrayList<Product> getProducts() {
+        Node localRoot = root;
+        ArrayList<Product> list = new ArrayList<>();
+        getProductRecursive(localRoot, list);
+        return list;
     }
 
     public List<Product> searchByCategory(ProductCategory category) {
