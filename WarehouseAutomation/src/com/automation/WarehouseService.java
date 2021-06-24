@@ -136,4 +136,9 @@ public class WarehouseService implements IWarehouseService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+    @Override
+    public PriorityQueue<Shipment> getShipments() {
+        return warehouse.getShipments();
+    }
 }

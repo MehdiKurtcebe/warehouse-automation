@@ -11,6 +11,7 @@ public interface IWarehouseService {
     boolean supplyProduct(BinarySearchTree<Product> productList);
     void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus);
     Shipment getShipmentById(int shipmentId);
+    PriorityQueue<Shipment> getShipments();
 
     Product searchProductById(int productId);
 

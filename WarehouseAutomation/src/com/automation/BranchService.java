@@ -26,5 +26,8 @@ public class BranchService implements IBranchService{
         return branches.get(branchId);
     }
 
-
+    @Override
+    public HashMap<Integer, Branch> getBranches() {
+        return branches;
+    }
 }
