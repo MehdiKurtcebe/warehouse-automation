@@ -2,7 +2,7 @@ package com.automation;
 
 import java.util.List;
 
-public class Shipment {
+public class Shipment implements Comparable<Shipment> {
 
     private int Id;
     private int branchId;
@@ -11,8 +11,7 @@ public class Shipment {
     private List<Product> productList;
 
     public Shipment(int branchId, ShipmentStatus status, List<Product> productList) {
-        //this.id = generate id
-        this.branchId=branchId;
+        this.Id = IdGenerator.GetFreshShipmentId();
         TransportationEmployeeService serve=new TransportationEmployeeService();
         this.employee = serve.occupyNearEmployee();
         this.status = status;
@@ -20,7 +19,7 @@ public class Shipment {
         this.productList = productList;
         this.branchId = branchId;
     }
-    public Shipment(ShipmentStatus status, List<Product> productList) {
+    /*public Shipment(ShipmentStatus status, List<Product> productList) {
 
         this.branchId=IdGenerator.GetFreshShipmentId();
         TransportationEmployeeService serve=new TransportationEmployeeService();
@@ -28,7 +27,7 @@ public class Shipment {
         this.status = status;
         this.productList = productList;
 
-    }
+    }*/
 
 
     public int getId() {
@@ -62,5 +61,10 @@ public class Shipment {
        //olan varsa üstüne mi eklenecek
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    @Override
+    public int compareTo(Shipment o) {
+        return this.getId() - o.getId();
     }
 }

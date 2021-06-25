@@ -1,5 +1,6 @@
 package com.automation;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 
@@ -11,8 +12,8 @@ public class BranchEmployeeService implements IBranchEmployeeService {
         warehouseService = new WarehouseService();
     }
 
-    public boolean createShipmentRequest(BinarySearchTree<Product> productList) {
-        return warehouseService.supplyProduct(productList);
+    public boolean createShipmentRequest(List<Product> productList, int branchId) {
+        return warehouseService.supplyProduct(productList, branchId);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class BranchEmployeeService implements IBranchEmployeeService {
     }
 
     @Override
-    public void createSupplyRequest(BinarySearchTree<Product> productList) {
-        warehouseService.supplyProduct(productList);
+    public void createSupplyRequest(List<Product> productList, int branchId) {
+        warehouseService.supplyProduct(productList, branchId);
     }
 }

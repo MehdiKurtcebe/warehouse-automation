@@ -42,6 +42,8 @@ public class Console {
 		adminService.addProduct(product3);
 		Product product4 = new Product(branch2.getId(), "anyProduct4", 150, ProductCategory.drinks);
 		adminService.addProduct(product4);
+		warehouseService.supplyProduct(product1, branch2.getId());
+		warehouseService.supplyProduct(product2, branch2.getId());
 
 		Login();
 	}
