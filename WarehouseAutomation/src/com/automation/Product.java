@@ -58,4 +58,11 @@ public class Product implements Comparable<Product> {
     public int compareTo(Product o) {
         return id - o.getId();
     }
+    
+    
+    @Override
+    public String toString() {
+    	return "Id: " +getId() + " Name: " +getName() + " Stock:" +getStockCount() +" store id: ";
+    }
+    
 }

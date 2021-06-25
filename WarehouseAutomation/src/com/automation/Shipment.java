@@ -67,4 +67,9 @@ public class Shipment implements Comparable<Shipment> {
     public int compareTo(Shipment o) {
         return this.getId() - o.getId();
     }
+    
+    @Override
+    public String toString() {
+    	return "Id " + Id + " transportationEmployeeId " + getEmployee().getId()+ " Products: " + getProductList() + " Branch Id " + getBranchId() ;
+    }
 }

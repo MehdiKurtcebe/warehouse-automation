@@ -80,7 +80,7 @@ public class Console {
 		} else if (theEmployee instanceof BranchEmployee) {
 
 		} else if (theEmployee instanceof WarehouseEmployee) {
-			
+			WarehouseEmployeeConsole((WarehouseEmployee)theEmployee);
 		} else if (theEmployee instanceof TransportationEmployee) {
 			TransportationEmployeeConsole((TransportationEmployee)theEmployee );
 		} else {
@@ -282,8 +282,57 @@ public class Console {
 
 	}
 
-	public void WarehouseEmployeeConsole() {
+	public static void WarehouseEmployeeConsole(WarehouseEmployee wareHouseEmp) {
+		
+		WarehouseEmployeeService warehouseEmployeeService = new WarehouseEmployeeService();
+		Warehouse warehouse = new Warehouse();
+		
+		
+		System.out.println("1-List Product");
+		System.out.println("2-List Shipments");
+		System.out.println("3-Get Shipment Information");
+		System.out.println("4-Search Product");
+		System.out.println("5-Log Out");
+		
+		int choice = getSubChoiceFromUser(5, "Select: ");
+		switch(choice){
+		
+			case 1: for(Product product : warehouseEmployeeService.getProductList() )
+						System.out.println(product);
+			break;
 			
+			case 2:
+				for(Shipment shipment: warehouse.getShipments())
+						System.out.println(shipment);
+				break;
+			
+			case 3:
+				int shipId = getNumberFromUser("Enter Shipment Id");
+				Shipment ship = warehouseEmployeeService.getShipmentInformation(shipId);
+				if(ship == null){
+					System.out.println("Wrong Id");
+				}
+				else 
+					System.out.println(ship);
+				break;
+				
+				
+			case 4: 
+				int productId = getNumberFromUser("Enter product Id");
+				Product product = warehouseEmployeeService.searchProduct(productId);
+				if(product == null){
+					System.out.println("Wrong Id");
+				}
+				else 
+					System.out.println(product);
+				break;
+				
+				
+			case 5: break;
+		}
+		
+			
+		
 	}
 
 	public static void TransportationEmployeeConsole(TransportationEmployee transportationEmployee) {
