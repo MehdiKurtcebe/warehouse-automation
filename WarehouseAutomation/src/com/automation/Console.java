@@ -79,6 +79,9 @@ public class Console {
 
 		} else if (theEmployee instanceof TransportationEmployee) {
 
+		} else{
+			System.out.println("Invalid Email or Password! Please Try Again.");
+			Login(userService, adminService);
 		}
 	}
 
@@ -151,7 +154,7 @@ public class Console {
 			System.out.println("10- Remove a Product");
 			System.out.println("11- List Shipments");
 
-			int choice = getSubChoiceFromUser(10, "Your Choice: ");
+			int choice = getSubChoiceFromUser(11, "Your Choice: ");
 
 			switch (choice) {
 				case 1:

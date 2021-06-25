@@ -159,14 +159,14 @@ public class ProductService implements IProductService {
     @Override
     public boolean add(Product product) {
         root = insert_Recursive(root, product);
-        this.buildTree(root);
+        //this.buildTree(root);
         return true;
     }
 
     @Override
     public boolean remove(int productId) {
         root = delete_Recursive(root, productId);
-        this.buildTree(root);
+        //this.buildTree(root);
         return true;
     }
 
