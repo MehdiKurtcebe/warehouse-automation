@@ -23,7 +23,7 @@ public class IdGenerator {
     }
 
     public static int GetFreshWarehouseId(){
-        return UUID.randomUUID().hashCode() & Integer.MAX_VALUE;
+        return 1111111111;
     }
 
     public static int GetFreshProductId(){
