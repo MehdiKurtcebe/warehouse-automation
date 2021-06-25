@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-    	Console.StartSystem();
+    	Console console = new Console();
+    	BranchEmployeeService branchEmployeeService = new BranchEmployeeService();
+    	console.BranchEmployeeConsole(branchEmployeeService);
 /*
         Scanner scan = new Scanner(System.in);
 

@@ -6,9 +6,21 @@ import java.util.PriorityQueue;
 public class BranchEmployeeService implements IBranchEmployeeService {
 
     private IWarehouseService warehouseService;
+    private IUserService userService;
 
     BranchEmployeeService(){
         warehouseService = new WarehouseService();
+    }
+
+    public void toString(int id){
+        BranchEmployee branchEmployee = (BranchEmployee)userService.search(id);
+        if(branchEmployee == null) throw new NoSuchElementException();
+        System.out.println("Name: " + branchEmployee.getName());
+        System.out.println("Phone: " + branchEmployee.getPhone());
+        System.out.println("Email: " + branchEmployee.getEmail());
+        System.out.println("Password: " + branchEmployee.getPassword());
+        System.out.println("ID: " + branchEmployee.getId());
+        System.out.println("Branch ID: " + branchEmployee.getBranchId());
     }
 
     public boolean createShipmentRequest(BinarySearchTree<Product> productList) {
@@ -31,6 +43,14 @@ public class BranchEmployeeService implements IBranchEmployeeService {
             if(s.getId() == shipmentId) return s;
         }
         throw new NoSuchElementException();
+    }
+
+    @Override
+    public Product getProductById(int productId) {
+        for(Product p: warehouseService.getProductList()){
+            if(p.getId() == productId) return p;
+        }
+        return new Product();
     }
 
     @Override
