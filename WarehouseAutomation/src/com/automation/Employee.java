@@ -9,12 +9,20 @@ public abstract class Employee {
     private EmployeeStatus status;
 
     public Employee(){
-        //id = generateId()
+        if (this instanceof BranchEmployee) id = IdGenerator.GetFreshBranchEmployeeId();
+        else if (this instanceof Admin) id = IdGenerator.GetFreshAdminId();
+        else if (this instanceof WarehouseEmployee) id = IdGenerator.GetFreshWarehouseEmployeeId();
+        else if (this instanceof TransportationEmployee) id = IdGenerator.GetFreshTransportationEmployeeId();
+
         status = EmployeeStatus.WAITING_FOR_APPROVAL;
     }
 
     public Employee(String name, String phone, String email, String password){
-        //id = generateId()
+        if (this instanceof BranchEmployee) id = IdGenerator.GetFreshBranchEmployeeId();
+        else if (this instanceof Admin) id = IdGenerator.GetFreshAdminId();
+        else if (this instanceof WarehouseEmployee) id = IdGenerator.GetFreshWarehouseEmployeeId();
+        else if (this instanceof TransportationEmployee) id = IdGenerator.GetFreshTransportationEmployeeId();
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -58,5 +66,11 @@ public abstract class Employee {
         this.password = password;
     }
 
+    public EmployeeStatus getStatus() {
+        return status;
+    }
 
+    public void setStatus(EmployeeStatus status) {
+        this.status = status;
+    }
 }

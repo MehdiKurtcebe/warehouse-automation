@@ -6,6 +6,13 @@ public class Branch {
     private String address;
     private String phone;
 
+    public Branch(String name, String address, String phone) {
+        this.id = IdGenerator.GetFreshBranchId();
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public int getId() {
         return id;
     }

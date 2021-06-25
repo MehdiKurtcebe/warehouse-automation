@@ -63,6 +63,7 @@ public class AdminService implements IAdminService {
 
     @Override
     public boolean addEmployee(Employee employee) {
+        employee.setStatus(EmployeeStatus.APPROVED);
         return userService.addUser(employee);
     }
 
@@ -102,18 +103,19 @@ public class AdminService implements IAdminService {
 
     @Override
     public boolean addEmployeeToApproval(Employee employee) {
+        employee.setStatus(EmployeeStatus.WAITING_FOR_APPROVAL);
         return waitingForApproval.add(employee);
     }
 
     @Override
     public void approveEmployee(int employeeId) {
-         for(Employee employee : waitingForApproval) {
-             if(employeeId == employee.getId()) {
-                 addEmployee(employee);
-                 waitingForApproval.remove(employee);
-                 break;
-             }
-         }
+        for(Employee employee : waitingForApproval) {
+            if(employeeId == employee.getId()) {
+                addEmployee(employee);
+                waitingForApproval.remove(employee);
+                break;
+            }
+        }
     }
 
     @Override

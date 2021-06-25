@@ -4,13 +4,13 @@ public class TransportationEmployee extends Employee {
 
     private int branchId;
     private boolean occupied;
-    private ShipmentStatus status;
+    private ShipmentStatus shipmentStatus;
 
     public TransportationEmployee(String name, String phone, String email, String password, int branchId){
         super(name, phone, email, password);
         this.branchId = branchId;
         this.occupied = false;
-        this.status = ShipmentStatus.NONE;
+        this.shipmentStatus = ShipmentStatus.NONE;
     }
 
     public int getBranchId() {
@@ -29,12 +29,12 @@ public class TransportationEmployee extends Employee {
         this.occupied = occupied;
     }
 
-    public ShipmentStatus getStatus() {
-        return status;
+    public ShipmentStatus getShipmentStatus() {
+        return shipmentStatus;
     }
 
-    public void setStatus(ShipmentStatus status) {
-        this.status = status;
+    public void setShipmentStatus(ShipmentStatus shipmentStatus) {
+        this.shipmentStatus = shipmentStatus;
     }
 
 }
