@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-
 public class Console {
-	public void StartSystem() {
+	public static void StartSystem() {
 		AdminService adminService = new AdminService();
 		WarehouseService warehouseService = new WarehouseService();
 		BranchService branchService = new BranchService();
@@ -16,9 +15,6 @@ public class Console {
 		UserService userService = new UserService();
 		WarehouseEmployeeService warehouseEmployeeService = new WarehouseEmployeeService();
 
-
-
-		Login(userService, adminService);
 		Admin admin = new Admin("Fatih Erdoğan Sevilgen", "02626052210", "sevilgen@gtu.edu.tr", "1234");
 		adminService.addEmployee(admin);
 		Warehouse warehouse = new Warehouse();
@@ -51,10 +47,12 @@ public class Console {
 		warehouseService.supplyProduct(product1, branch2.getId());
 		warehouseService.supplyProduct(product2, branch2.getId());
 
-		Login(userService,adminService);
+		Login();
 	}
 
-	public void Login(UserService userService, AdminService adminService) {
+	private static void Login() {
+		UserService userService = new UserService();
+		AdminService adminService = new AdminService();
 		System.out.println("----------WAREHOUSE AUTOMATION SYSTEM----------");
 
 		Scanner mailinput = new Scanner(System.in);
@@ -86,11 +84,14 @@ public class Console {
 		} else if (theEmployee instanceof WarehouseEmployee) {
 
 		} else if (theEmployee instanceof TransportationEmployee) {
-
+			TransportationEmployeeConsole((TransportationEmployee)theEmployee );
+		} else {
+			System.out.println("Invalid Email or Password! Please Try Again.");
+			Login();
 		}
 	}
 
-	public int getSubChoiceFromUser(int upperBound, String message){
+	private static int getSubChoiceFromUser(int upperBound, String message){
 		int choice;
 		Scanner input = new Scanner(System.in);
 		System.out.print(message);
@@ -108,7 +109,7 @@ public class Console {
 		return choice;
 	}
 
-	public String getStringFromUser(String message){
+	private static String getStringFromUser(String message){
 		Scanner input = new Scanner(System.in);
 		String bName=null;
 		System.out.print(message);
@@ -122,7 +123,7 @@ public class Console {
 		return bName;
 	}
 
-	public static int getNumberFromUser(String message){
+	private static int getNumberFromUser(String message){
 		int choice;
 		Scanner input = new Scanner(System.in);
 		System.out.print(message);
@@ -143,8 +144,9 @@ public class Console {
 		return choice;
 	}
 
-	public void AdminConsole(Admin admin, AdminService adminService) {
+	private static void AdminConsole(Admin admin, AdminService adminService) {
 		while(true) {
+			System.out.println("\n------------------------------");
 			System.out.println("WELCOME " + admin.getName() + "\n");
 			System.out.println("1- List Employees");
 			System.out.println("2- List Pending Approvals");
@@ -156,29 +158,32 @@ public class Console {
 			System.out.println("8- List Products");
 			System.out.println("9- Add a Product");
 			System.out.println("10- Remove a Product");
-			System.out.println("8- List Shipments");
+			System.out.println("11- List Shipments");
 
-			int choice = getSubChoiceFromUser(10, "Your Choice: ");
+			int choice = getSubChoiceFromUser(11, "Your Choice: ");
 
 			switch (choice) {
 				case 1:
+					System.out.println("\n------------------------------");
 					for (Employee employee : adminService.getEmployees().values()) {
-						System.out.println("" + employee.getId() + " - " + employee.getName()
+						System.out.println("" + employee.getName() + " - " + employee.getId()
 								+ " - " + employee.getEmail() + " - " + employee.getPhone());
 					}
 					break;
 				case 2:
+					System.out.println("\n------------------------------");
 					for (Employee employee : adminService.getWaitingApprovals()) {
-						System.out.println("" + employee.getId() + " - " + employee.getName()
+						System.out.println("" + employee.getName() + " - " + employee.getId()
 								+ " - " + employee.getEmail() + " - " + employee.getPhone());
 					}
 					break;
 				case 3:
+					System.out.println("\n------------------------------");
 					System.out.println("1- Branch Employee");
 					System.out.println("2- Warehouse Employee");
 					System.out.println("3- Transportation Employee");
 
-					int choice2 = getSubChoiceFromUser(3, "Which Employee Do You Want To Add?");
+					int choice2 = getSubChoiceFromUser(3, "Which Employee Do You Want To Add? ");
 
 					String name, email, phone, password;
 					switch (choice2) {
@@ -203,24 +208,74 @@ public class Console {
 							adminService.addEmployee(employee1);
 							break;
 						case 3:
+							name = getStringFromUser("Name: ");
+							phone = getStringFromUser("Phone: ");
+							email = getStringFromUser("Email: ");
+							password = getStringFromUser("Password: ");
+							int branchId1 = getNumberFromUser("Branch ID: ");
+							int distance = getNumberFromUser("The Distance Between the Branch and the Warehouse: ");
 
+							TransportationEmployee employee2 = new TransportationEmployee(name, phone, email, password, branchId1, distance);
+							adminService.addEmployee(employee2);
 							break;
 					}
 					break;
 				case 4:
+					System.out.println("\n------------------------------");
+					int id = getNumberFromUser("Enter the ID of the Employee: ");
+					adminService.removeEmployee(id);
 					break;
 				case 5:
+					System.out.println("\n------------------------------");
+					for (Branch branch : adminService.getBranches().values()) {
+						System.out.println("" + branch.getName() + " - " + branch.getId()
+								+ " - " + branch.getAddress() + " - " + branch.getPhone());
+					}
 					break;
 				case 6:
+					System.out.println("\n------------------------------");
+					String name1 = getStringFromUser("Name: ");
+					String address = getStringFromUser("Address: ");
+					String phone1 = getStringFromUser("Phone: ");
+
+					Branch branch = new Branch(name1, address, phone1);
+					adminService.addBranch(branch);
 					break;
 				case 7:
+					System.out.println("\n------------------------------");
+					int id1 = getNumberFromUser("Enter the ID of the Branch: ");
+					adminService.removeBranch(id1);
 					break;
 				case 8:
+					System.out.println("\n------------------------------");
+					for (Product product : adminService.getProducts()) {
+						String branchName = adminService.queryBranchById(product.getStoreId()) != null ?
+								adminService.queryBranchById(product.getStoreId()).getName() : "Warehouse";
+						System.out.println("" + product.getName() + " - " + product.getId()
+								+ " - " + branchName + " - Stock: " + product.getStockCount() + " - " + product.getCategory());
+					}
 					break;
 				case 9:
+					System.out.println("\n------------------------------");
+					String name2 = getStringFromUser("Name: ");
+					int stock = getNumberFromUser("Stock Count: ");
+					int storeId = getNumberFromUser("Branch ID: ");
+
+					Product product = new Product(storeId, name2, stock, ProductCategory.drinks);
+					adminService.addProduct(product);
 					break;
 				case 10:
+					System.out.println("\n------------------------------");
+					int productId = getNumberFromUser("Product ID: ");
+					adminService.removeProduct(productId);
 					break;
+				case 11:
+					System.out.println("\n------------------------------");
+					for (Shipment shipment : adminService.getShipments()) {
+						String branchName =	adminService.queryBranchById(shipment.getBranchId()).getName();
+						System.out.println("" + shipment.getProductList() + " - " + shipment.getId() + " - " + shipment.getStatus()
+								+ " - " + branchName + " - Transporter: " + shipment.getEmployee().getName());
+					}
 			}
 		}
 	}
@@ -371,11 +426,70 @@ public class Console {
 		}
 	}
 
+
 	public void WarehouseEmployeeConsole() {
 
 	}
 
-	public void TransportationEmployeeConsole() {
+	public static void TransportationEmployeeConsole(TransportationEmployee transportationEmployee) {
+
+		WarehouseService warehouseService = new WarehouseService();
+
+
+		System.out.println("WELCOME "+ transportationEmployee.getName() + "\n");
+		System.out.println("1- Show My Shipment");
+		System.out.println("2- Update Shipment Status");
+		System.out.println("3- Log Out");
+
+		int choice = getSubChoiceFromUser(3,"Your Choice: ");
+		switch (choice) {
+			case 1 :
+				for(Shipment shipment : transportationEmployee.getMyShipments())
+					System.out.println(shipment);
+				TransportationEmployeeConsole(transportationEmployee);
+				break;
+
+
+			case 2 :
+				Scanner scanner = new Scanner(System.in);
+				Shipment shipment = null;
+				do {
+					System.out.println("Enter Shipment Id (Cancel: -1)");
+					int shipmentId = scanner.nextInt();
+					if(shipmentId == -1) {
+						TransportationEmployeeConsole(transportationEmployee);
+						System.out.println("");
+						break;
+					}
+					shipment = warehouseService.getShipmentById(shipmentId);
+					if(shipment == null)
+						System.out.println("Shipment Id is wrong try again");
+				}while(shipment == null);
+
+				ShipmentStatus shipStatus = ShipmentStatus.NONE;
+				int status = getSubChoiceFromUser(3,"1-Packed \n2-Shipped \n3-Delivered");
+
+				if(status == 1)
+					shipStatus = ShipmentStatus.PACKED;
+				else if(status == 2)
+					shipStatus = ShipmentStatus.SHIPPED;
+				else if(status == 3)
+					shipStatus = ShipmentStatus.DELIVERED;
+
+				warehouseService.updateShipmentStatus(shipment.getId(), shipStatus);
+
+				System.out.println("The shipment updated");
+				TransportationEmployeeConsole(transportationEmployee);
+				break;
+
+			case 3 : Login();
+
+		}
+
+
+
+
+
 
 	}
 }

@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
     	Console console = new Console();
     	BranchEmployeeService branchEmployeeService = new BranchEmployeeService();
-    	console.BranchEmployeeConsole(branchEmployeeService);
+    	console.StartSystem();
 /*
         Scanner scan = new Scanner(System.in);
 
