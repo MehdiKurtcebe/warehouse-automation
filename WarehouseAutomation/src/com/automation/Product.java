@@ -17,6 +17,10 @@ public class Product implements Comparable<Product> {
         this.category = category;
     }
 
+    public boolean compareTo(Product product){
+        return id > product.getId();
+    }
+
     public int getId() {
         return id;
     }
