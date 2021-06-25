@@ -1,5 +1,8 @@
 package com.automation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TransportationEmployee extends Employee {
 
     private int branchId;
@@ -45,6 +48,17 @@ public class TransportationEmployee extends Employee {
 
 	public void setDistanceToWareHouse(double distanceToWareHouse) {
 		this.distanceToWareHouse = distanceToWareHouse;
+	}
+    
+	public List<Shipment> getMyShipments() {
+		WarehouseService warehouseService = new WarehouseService();
+		List<Shipment> shipments = new ArrayList<Shipment>();
+		
+		for(Shipment shipment: warehouseService.getShipments())
+			if( shipment.getEmployee().getId() == this.getId() )
+				shipments.add(shipment);
+		
+		return shipments;
 	}
     
     
