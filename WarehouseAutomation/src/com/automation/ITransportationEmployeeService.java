@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface ITransportationEmployeeService {
 
-    TransportationEmployee occupyNearEmployee(int branchId);
+    TransportationEmployee occupyNearEmployee();		
     boolean releaseGivenEmployee(int transportationEmployeeId);
-    void updateShipmentStatus(ShipmentStatus status);
+    void updateShipmentStatus(int shipmentId, ShipmentStatus status);
     Shipment getShipmentToBeDelivered(int branchId);
 }
