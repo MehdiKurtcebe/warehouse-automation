@@ -204,7 +204,9 @@ public class Console {
 						System.out.println("Enter the product's stock count");
 						stock = scan.nextInt();
 						System.out.println("Enter the product's category");
-						category = scan.nextLine();
+						sCategory = scan.nextLine();
+
+						category = ProductCategory.valueOf(sCategory);
 
 						product = new Product(branchId, name, stock, category);
 						productList.add(product);
