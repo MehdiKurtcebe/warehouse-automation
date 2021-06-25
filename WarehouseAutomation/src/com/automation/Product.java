@@ -16,10 +16,6 @@ public class Product implements Comparable<Product> {
         this.stockCount = stockCount;
         category = category_;
     }
-    
-    public boolean compareTo(Product product){
-        return id > product.getId();
-    }
 
     public int getId() {
         return id;
@@ -60,6 +56,6 @@ public class Product implements Comparable<Product> {
 
     @Override
     public int compareTo(Product o) {
-        return 0;
+        return id - o.getId();
     }
 }

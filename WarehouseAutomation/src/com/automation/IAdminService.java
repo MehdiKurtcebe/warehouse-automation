@@ -12,7 +12,7 @@ public interface IAdminService {
     boolean setEmployeeName(int employeeId, String name);
     boolean setEmployeePassword(int employeeId, String password);
     boolean addEmployee(Employee employee);
-    boolean removeEmployee(Employee employee);
+    boolean removeEmployee(int employeeId);
     ConcurrentSkipListMap<Integer, Employee> getEmployees();
     List<Employee> queryEmployeesByName(String name);
     Employee queryEmployeeById(int id);
@@ -24,6 +24,6 @@ public interface IAdminService {
     List<Product> queryProductByName(String name);
     Product queryProductById(int id);
     boolean addProduct(Product product);
-    boolean removeProduct(Product product);
+    boolean removeProduct(int productId);
     PriorityQueue<Shipment> getShipments();
 }

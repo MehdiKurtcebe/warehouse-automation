@@ -68,8 +68,10 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public boolean removeEmployee(Employee employee) {
-        return userService.removeUser(employee);
+    public boolean removeEmployee(int employeeId) {
+        Employee employee = userService.search(employeeId);
+        if (employee != null) return userService.removeUser(employee);
+        else return false;
     }
 
     @Override
@@ -158,8 +160,8 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public boolean removeProduct(Product product) {
-        return productService.remove(product.getId());
+    public boolean removeProduct(int productId) {
+        return productService.remove(productId);
     }
 
     @Override
