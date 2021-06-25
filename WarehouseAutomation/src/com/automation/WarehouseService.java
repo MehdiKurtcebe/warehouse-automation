@@ -89,7 +89,7 @@ public class WarehouseService implements IWarehouseService {
      * @return true if it is succeed
      */
     @Override
-    public boolean supplyProduct(Product product) {
+    public boolean supplyProduct(Product product, int branchId) {
         //Create shipment for it with none status and add it to warehouse
 
 
@@ -105,7 +105,7 @@ public class WarehouseService implements IWarehouseService {
         //int shipid= generate
 
 
-        Shipment ship = new Shipment(NONE,productList);
+        Shipment ship = new Shipment(branchId, NONE, productList);
 
         return warehouse.addShipment(ship);
     }
@@ -129,12 +129,13 @@ public class WarehouseService implements IWarehouseService {
 
         return shipment;
     }
-	
-	
+
+
 	@Override
-	public boolean supplyProduct(BinarySearchTree<Product> productList) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean supplyProduct(List<Product> productList, int branchId) {
+        Shipment ship = new Shipment(branchId, NONE, productList);
+
+        return warehouse.addShipment(ship);
 	}
 
     @Override

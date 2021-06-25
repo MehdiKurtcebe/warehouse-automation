@@ -7,8 +7,8 @@ public interface IWarehouseService {
     PriorityQueue<Shipment> getShipmentsByBranchId(int branchId);
     List<Product> getProductList();
     List<Product> getOutOfStockProducts();
-    boolean supplyProduct(Product product);
-    boolean supplyProduct(BinarySearchTree<Product> productList);
+    boolean supplyProduct(Product product, int branchId);
+    boolean supplyProduct(List<Product> productList, int branchId);
     void updateShipmentStatus(int shipmentId, ShipmentStatus shipmentStatus);
     Shipment getShipmentById(int shipmentId);
     PriorityQueue<Shipment> getShipments();

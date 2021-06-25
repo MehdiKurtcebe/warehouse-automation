@@ -4,6 +4,8 @@ import java.util.*;
 
 public class IdGenerator {
 
+    private static int idCounter = 1000;
+
     public static int GetFreshBranchEmployeeId(){
         return UUID.randomUUID().hashCode() & Integer.MAX_VALUE;
     }
@@ -33,6 +35,6 @@ public class IdGenerator {
     }
 
     public static int GetFreshShipmentId(){
-        return UUID.randomUUID().hashCode() & Integer.MAX_VALUE;
+        return idCounter++;
     }
 }

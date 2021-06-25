@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-import static com.automation.ProductCategory.*;
 
 public class Console {
 	public void StartSystem() {
@@ -20,6 +19,39 @@ public class Console {
 
 
 		Login(userService, adminService);
+		Admin admin = new Admin("Fatih Erdoğan Sevilgen", "02626052210", "sevilgen@gtu.edu.tr", "1234");
+		adminService.addEmployee(admin);
+		Warehouse warehouse = new Warehouse();
+		Branch branch1 = new Branch("branch1", "Gebze", "02623333333");
+		adminService.addBranch(branch1);
+		Branch branch2 = new Branch("branch2", "İzmit", "02624444444");
+		adminService.addBranch(branch2);
+		BranchEmployee branchEmployee1 = new BranchEmployee("anyName1", "05321111111", "anyName1@abc.com", "1234", branch1.getId());
+		adminService.addEmployee(branchEmployee1);
+		BranchEmployee branchEmployee2 = new BranchEmployee("anyName2", "05323333333", "anyName2@abc.com", "1234", branch2.getId());
+		adminService.addEmployee(branchEmployee2);
+		WarehouseEmployee warehouseEmployee1 = new WarehouseEmployee("anyName3", "05324444444", "anyName3@abc.com", "1234", warehouse.getId());
+		adminService.addEmployee(warehouseEmployee1);
+		WarehouseEmployee warehouseEmployee2 = new WarehouseEmployee("anyName4", "05325555555", "anyName4@abc.com", "1234", warehouse.getId());
+		adminService.addEmployee(warehouseEmployee2);
+		TransportationEmployee transportationEmployee1 = new TransportationEmployee("anyName5", "05326666666", "anyName5@abc.com", "1234", branch1.getId(), 50);
+		adminService.addEmployee(transportationEmployee1);
+		TransportationEmployee transportationEmployee2 = new TransportationEmployee("anyName6", "05327777777", "anyName6@abc.com", "1234", branch1.getId(), 25);
+		adminService.addEmployee(transportationEmployee2);
+		BranchEmployee pendingEmployee1 = new BranchEmployee("pending1", "05421111111", "pending1@abc.com", "1234", branch1.getId());
+		adminService.addEmployeeToApproval(pendingEmployee1);
+		Product product1 = new Product(warehouse.getId(), "anyProduct1", 100, ProductCategory.drinks);
+		adminService.addProduct(product1);
+		Product product2 = new Product(warehouse.getId(), "anyProduct2", 200, ProductCategory.drinks);
+		adminService.addProduct(product2);
+		Product product3 = new Product(branch1.getId(), "anyProduct3", 50, ProductCategory.drinks);
+		adminService.addProduct(product3);
+		Product product4 = new Product(branch2.getId(), "anyProduct4", 150, ProductCategory.drinks);
+		adminService.addProduct(product4);
+		warehouseService.supplyProduct(product1, branch2.getId());
+		warehouseService.supplyProduct(product2, branch2.getId());
+
+		Login(userService,adminService);
 	}
 
 	public void Login(UserService userService, AdminService adminService) {
