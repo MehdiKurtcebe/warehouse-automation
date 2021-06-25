@@ -14,7 +14,7 @@ public class Shipment {
         //this.id = generate id
         this.branchId=branchId;
         TransportationEmployeeService serve=new TransportationEmployeeService();
-        this.employee = serve.occupyNearEmployee(branchId);
+        this.employee = serve.occupyNearEmployee();
         this.status = status;
         this.productList = productList;
         this.branchId = branchId;
@@ -23,7 +23,7 @@ public class Shipment {
 
         this.branchId=IdGenerator.GetFreshShipmentId();
         TransportationEmployeeService serve=new TransportationEmployeeService();
-        this.employee = serve.occupyNearEmployee(branchId);
+        this.employee = serve.occupyNearEmployee();
         this.status = status;
         this.productList = productList;
 

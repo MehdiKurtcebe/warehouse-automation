@@ -5,12 +5,14 @@ public class TransportationEmployee extends Employee {
     private int branchId;
     private boolean occupied;
     private ShipmentStatus status;
+    private double distanceToWareHouse;
 
-    public TransportationEmployee(String name, String phone, String email, String password, int branchId){
+    public TransportationEmployee(String name, String phone, String email, String password, int branchId, double distanceToWareHouse){
         super(name, phone, email, password);
         this.branchId = branchId;
-        this.occupied = false;
+        this.occupied = false;					
         this.status = ShipmentStatus.NONE;
+        this.setDistanceToWareHouse(distanceToWareHouse);
     }
 
     public int getBranchId() {
@@ -36,5 +38,15 @@ public class TransportationEmployee extends Employee {
     public void setStatus(ShipmentStatus status) {
         this.status = status;
     }
+
+	public double getDistanceToWareHouse() {
+		return distanceToWareHouse;
+	}
+
+	public void setDistanceToWareHouse(double distanceToWareHouse) {
+		this.distanceToWareHouse = distanceToWareHouse;
+	}
+    
+    
 
 }

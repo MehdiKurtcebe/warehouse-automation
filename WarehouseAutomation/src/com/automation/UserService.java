@@ -1,25 +1,19 @@
 package com.automation;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.Scanner;
 
 public class UserService implements IUserService {
 
     private static ConcurrentSkipListMap<Integer,Employee> employeeList;
-    private IAdminService adminService;
+   // private IAdminService adminService;
 
     public UserService(){
 
     	if(employeeList == null)
     		employeeList = new ConcurrentSkipListMap<Integer, Employee>();
 
-        this.adminService = new AdminService();
+     //   this.adminService = new AdminService();
     }
 
     @Override
