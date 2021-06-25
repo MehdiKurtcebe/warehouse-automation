@@ -1,5 +1,7 @@
 package com.automation;
 
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class Console {
@@ -80,7 +82,7 @@ public class Console {
 		} else if (theEmployee instanceof BranchEmployee) {
 
 		} else if (theEmployee instanceof WarehouseEmployee) {
-			
+
 		} else if (theEmployee instanceof TransportationEmployee) {
 			TransportationEmployeeConsole((TransportationEmployee)theEmployee );
 		} else {
@@ -278,33 +280,176 @@ public class Console {
 		}
 	}
 
-	public void BranchEmployeeConsole() {
+	public void BranchEmployeeConsole(BranchEmployeeService branchEmployeeService) {
 
+		WarehouseService warehouseService = new WarehouseService();
+
+		System.out.println("Welcome to Branch Employee Console");
+
+		Scanner scan = new Scanner(System.in);
+		int choice = -1;
+
+		String name;
+		String phone;
+		String email;
+		String password;
+		int id;
+		int branchId;
+
+		Shipment shipment;
+
+		while(choice != 0){
+			System.out.println("-----MENU-----");
+			System.out.println("0- Exit");
+			System.out.println("1- Create shipment request");
+			System.out.println("2- Check if a branch has a specific product");
+			System.out.println("3- See shipment by ID");
+			System.out.println("4- See shipment History");
+			System.out.println("5- Create supply request");
+			System.out.println("6- See a branch employee's information");
+			System.out.println("Please choose an operation: ");
+			choice = scan.nextInt();
+
+			switch(choice){
+				case 0:
+					break;
+
+				case 1:
+					BinarySearchTree<Product> productList = new BinarySearchTree<Product>();
+					int count;
+					System.out.println("How many products do you want to request?");
+					count = scan.nextInt();
+
+					Product product;
+
+					for(int i=0; i<count; i++){
+						System.out.println("Enter the product's id");
+						id = scan.nextInt();
+
+						product = warehouseService.searchProductById(id);
+						productList.add(product);
+					}
+
+					break;
+
+				case 2:
+					System.out.println("Enter the ID of the branch you want to see the products of:");
+					branchId = scan.nextInt();
+					BinarySearchTree<Product> productList1;
+					productList1 = branchEmployeeService.getProductList(branchId);
+					System.out.println("Enter the ID of the product you want to check if the branch has:");
+					int productId = scan.nextInt();
+					Product target = branchEmployeeService.getProductById(productId);
+					if(productList1.find(target) != null)   System.out.println("Branch " + branchId + " has product " + productId);
+					else    System.out.println("Branch " + branchId + " does not have product " + productId);
+
+					break;
+
+				case 3:
+					System.out.println("Enter the ID of the shipment you want to see the products of:");
+					int shipmentId = scan.nextInt();
+					System.out.println("Enter the ID of the branch:");
+					branchId = scan.nextInt();
+					shipment = branchEmployeeService.getShipmentById(shipmentId, branchId);
+					List<Product> productList2;
+					productList2 = shipment.getProductList();
+					for(int i=0; i<productList2.size(); i++){
+						System.out.println("Product " + i+1 + "'s ID: " + productList2.get(i).getId());
+						System.out.println("Product " + i+1 + "'s name: " + productList2.get(i).getName());
+						System.out.println("Product " + i+1 + "'s stock count: " + productList2.get(i).getStockCount());
+						System.out.println("Product " + i+1 + "'s category: " + productList2.get(i).getCategory());
+					}
+
+					break;
+
+				case 4:
+					System.out.println("Enter the ID of the branch you want to see the shipment history of");
+					branchId = scan.nextInt();
+					PriorityQueue<Shipment> shipmentHistory;
+					shipmentHistory = branchEmployeeService.getShipmentHistory(branchId);
+					int i = 0;
+					while(shipmentHistory.size() > 0){
+						Shipment shipment1 = shipmentHistory.poll();
+						System.out.println("Shipment " + i + "'s ID: " + shipment1.getId());
+						System.out.println("Shipment " + i + "'s transportation employee's ID: " + shipment1.getEmployee());
+						System.out.println("Shipment " + i + "'s shipment status: " + shipment1.getStatus());
+						System.out.println("Shipment " + i + "'s product list: ");
+						List<Product> productList3;
+						productList3 = shipment1.getProductList();
+						for(int j=0; j<productList3.size(); j++){
+							System.out.println("\tProduct " + j+1 + "'s ID: " + productList3.get(j).getId());
+							System.out.println("\tProduct " + j+1 + "'s name: " + productList3.get(j).getName());
+							System.out.println("\tProduct " + j+1 + "'s stock count: " + productList3.get(j).getStockCount());
+							System.out.println("\tProduct " + j+1 + "'s category: " + productList3.get(j).getCategory());
+						}
+					}
+					break;
+
+				case 5:
+					BinarySearchTree<Product> productList4 = new BinarySearchTree<Product>();
+					System.out.println("Which branch do you want to add the products to?");
+					branchId = scan.nextInt();
+					System.out.println("How many products do you want to enter?");
+					count = scan.nextInt();
+
+					int stock;
+					ProductCategory category;
+					String sCategory;
+
+					for(i=0; i<count; i++){
+						System.out.println("Enter the product's name");
+						name = scan.nextLine();
+						System.out.println("Enter the product's stock count");
+						stock = scan.nextInt();
+						System.out.println("Enter the product's category");
+						sCategory = scan.nextLine();
+
+						category = ProductCategory.valueOf(sCategory);
+
+						product = new Product(branchId, name, stock, category);
+						productList4.add(product);
+					}
+
+					break;
+
+				case 6:
+					System.out.println("Enter the branchEmployee's ID: ");
+					id = scan.nextInt();
+					branchEmployeeService.toString(id);
+
+					break;
+
+				default:
+					System.out.println("You entered an invalid number.");
+					System.out.println("Please choose another operation");
+			}
+		}
 	}
 
+
 	public void WarehouseEmployeeConsole() {
-			
+
 	}
 
 	public static void TransportationEmployeeConsole(TransportationEmployee transportationEmployee) {
-		
+
 		WarehouseService warehouseService = new WarehouseService();
-	
-	
+
+
 		System.out.println("WELCOME "+ transportationEmployee.getName() + "\n");
 		System.out.println("1- Show My Shipment");
 		System.out.println("2- Update Shipment Status");
 		System.out.println("3- Log Out");
-		
+
 		int choice = getSubChoiceFromUser(3,"Your Choice: ");
 		switch (choice) {
-			case 1 : 
+			case 1 :
 				for(Shipment shipment : transportationEmployee.getMyShipments())
 					System.out.println(shipment);
 				TransportationEmployeeConsole(transportationEmployee);
 				break;
-		
-		
+
+
 			case 2 :
 				Scanner scanner = new Scanner(System.in);
 				Shipment shipment = null;
@@ -320,31 +465,31 @@ public class Console {
 					if(shipment == null)
 						System.out.println("Shipment Id is wrong try again");
 				}while(shipment == null);
-				
+
 				ShipmentStatus shipStatus = ShipmentStatus.NONE;
 				int status = getSubChoiceFromUser(3,"1-Packed \n2-Shipped \n3-Delivered");
-				
+
 				if(status == 1)
 					shipStatus = ShipmentStatus.PACKED;
 				else if(status == 2)
 					shipStatus = ShipmentStatus.SHIPPED;
 				else if(status == 3)
 					shipStatus = ShipmentStatus.DELIVERED;
-				
+
 				warehouseService.updateShipmentStatus(shipment.getId(), shipStatus);
-				
+
 				System.out.println("The shipment updated");
 				TransportationEmployeeConsole(transportationEmployee);
 				break;
-		
+
 			case 3 : Login();
-		
+
 		}
-		
-		 
-				
-		
-		
-		
+
+
+
+
+
+
 	}
 }
