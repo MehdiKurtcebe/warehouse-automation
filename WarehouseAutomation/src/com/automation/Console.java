@@ -43,10 +43,12 @@ public class Console {
 		Product product4 = new Product(branch2.getId(), "anyProduct4", 150, ProductCategory.drinks);
 		adminService.addProduct(product4);
 
-		Login(userService, adminService);
+		Login();
 	}
 
-	private static void Login(UserService userService, AdminService adminService) {
+	private static void Login() {
+		UserService userService = new UserService();
+		AdminService adminService = new AdminService();
 		System.out.println("----------WAREHOUSE AUTOMATION SYSTEM----------");
 
 		Scanner mailinput = new Scanner(System.in);
@@ -76,9 +78,9 @@ public class Console {
 		} else if (theEmployee instanceof BranchEmployee) {
 
 		} else if (theEmployee instanceof WarehouseEmployee) {
-
+			
 		} else if (theEmployee instanceof TransportationEmployee) {
-
+			TransportationEmployeeConsole((TransportationEmployee)theEmployee );
 		}
 	}
 
@@ -276,10 +278,68 @@ public class Console {
 	}
 
 	public void WarehouseEmployeeConsole() {
-
+			
 	}
 
-	public void TransportationEmployeeConsole() {
-
+	public static void TransportationEmployeeConsole(TransportationEmployee transportationEmployee) {
+		
+		WarehouseService warehouseService = new WarehouseService();
+	
+	
+		System.out.println("WELCOME "+ transportationEmployee.getName() + "\n");
+		System.out.println("1- Show My Shipment");
+		System.out.println("2- Update Shipment Status");
+		System.out.println("3- Log Out");
+		
+		int choice = getSubChoiceFromUser(3,"Your Choice: ");
+		switch (choice) {
+			case 1 : 
+				for(Shipment shipment : transportationEmployee.getMyShipments())
+					System.out.println(shipment);
+				TransportationEmployeeConsole(transportationEmployee);
+				break;
+		
+		
+			case 2 :
+				Scanner scanner = new Scanner(System.in);
+				Shipment shipment = null;
+				do {
+					System.out.println("Enter Shipment Id (Cancel: -1)");
+					int shipmentId = scanner.nextInt();
+					if(shipmentId == -1) {
+						TransportationEmployeeConsole(transportationEmployee);
+						System.out.println("");
+						break;
+					}
+					shipment = warehouseService.getShipmentById(shipmentId);
+					if(shipment == null)
+						System.out.println("Shipment Id is wrong try again");
+				}while(shipment == null);
+				
+				ShipmentStatus shipStatus = ShipmentStatus.NONE;
+				int status = getSubChoiceFromUser(3,"1-Packed \n2-Shipped \n3-Delivered");
+				
+				if(status == 1)
+					shipStatus = ShipmentStatus.PACKED;
+				else if(status == 2)
+					shipStatus = ShipmentStatus.SHIPPED;
+				else if(status == 3)
+					shipStatus = ShipmentStatus.DELIVERED;
+				
+				warehouseService.updateShipmentStatus(shipment.getId(), shipStatus);
+				
+				System.out.println("The shipment updated");
+				TransportationEmployeeConsole(transportationEmployee);
+				break;
+		
+			case 3 : Login();
+		
+		}
+		
+		 
+				
+		
+		
+		
 	}
 }
