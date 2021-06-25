@@ -16,6 +16,8 @@ public class Shipment {
         TransportationEmployeeService serve=new TransportationEmployeeService();
         this.employee = serve.occupyNearEmployee(branchId);
         this.status = status;
+        InsertionSort insertionSort;
+        productList = insertionSort(productList);
         this.productList = productList;
         this.branchId = branchId;
     }
